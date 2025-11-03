@@ -22,7 +22,7 @@ const Signin = () => {
       },
       password: data.password,
     };
-    const API_URL = "http://localhost:3000/auth/register";
+    const API_URL = "https://novachat-tclo.onrender.com/auth/register";
     try {
       const API = await axios
         .post(API_URL, modData, { withCredentials: true })

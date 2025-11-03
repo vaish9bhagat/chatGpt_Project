@@ -38,7 +38,7 @@ const Home = () => {
     if (chats.chats.length > 0 && chatId) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/messages/${chatId}`,
+          `https://novachat-tclo.onrender.com/messages/${chatId}`,
           { withCredentials: true }
         );
         setmessages(
@@ -59,7 +59,7 @@ const Home = () => {
     if (!title) return;
     try {
       const response = await axios.post(
-        "http://localhost:3000/chat",
+        "https://novachat-tclo.onrender.com/chat",
         { title },
         {
           withCredentials: true,
@@ -76,9 +76,12 @@ const Home = () => {
   };
   const getAllChats = async () => {
     try {
-      var response = await axios.get("http://localhost:3000/getchats", {
-        withCredentials: true,
-      });
+      var response = await axios.get(
+        "https://novachat-tclo.onrender.com/getchats",
+        {
+          withCredentials: true,
+        }
+      );
       dispatch(setChats(response.data.chats.reverse()));
       dispatch(selectChat(response?.data?.chats[0]?._id));
       if (!activeChatId) return;
@@ -99,7 +102,9 @@ const Home = () => {
 
   useEffect(() => {
     getAllChats();
-    const server = io("http://localhost:3000", { withCredentials: true });
+    const server = io("https://novachat-tclo.onrender.com", {
+      withCredentials: true,
+    });
     setsocket(server);
     server.on("ai-response", (messagepayload) => {
       setmessages((prev) => [...prev, { type: "ai", content: messagepayload }]);
